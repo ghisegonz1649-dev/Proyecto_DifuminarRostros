@@ -136,7 +136,7 @@ def mostrar_reporte_video(stats):
 
 def main():
     while True:
-        print("\n🎥 MENÚ PRINCIPAL - DETECCIÓN DE ROSTROS EN VIDEO")
+        print("\nMENÚ PRINCIPAL - DETECCIÓN DE ROSTROS EN VIDEO")
         print("1. Procesar archivo de video")
         print("2. Usar cámara web")
         print("3. Salir")
