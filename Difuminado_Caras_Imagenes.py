@@ -105,7 +105,7 @@ def mostrar_previsualizacion(img, num_faces):
 
 def mostrar_reporte(stats, output_dir):
     print("\n" + "="*50)
-    print("📊 REPORTE FINAL")
+    print("REPORTE FINAL")
     print("="*50)
     
     # Cálculo de métricas
@@ -119,13 +119,13 @@ def mostrar_reporte(stats, output_dir):
     print(f"• Cobertura: {porcentaje_deteccion:.2f}%")
     print(f"• Precisión: {precision:.2f}%")
     print("="*50)
-    print(f"🌟 PORCENTAJE DE APRENDIZAJE: {aprendizaje:.2f}%")
+    print(f"PORCENTAJE DE APRENDIZAJE: {aprendizaje:.2f}%")
     print("="*50 + "\n")
 
 
 def main():
     while True:
-        print("\n📷 MENÚ PRINCIPAL - DETECCIÓN DE ROSTROS")
+        print("\n MENÚ PRINCIPAL - DETECCIÓN DE ROSTROS")
         print("1. Iniciar procesamiento de imágenes")
         print("2. Salir")
         opcion = input("Seleccione una opción (1-2): ")
@@ -139,10 +139,10 @@ def main():
             print("="*50)
             procesar_imagenes(dataset_dir, output_dir, mostrar_preview=True)
         elif opcion == "2":
-            print("👋 ¡Hasta luego!")
+            print("¡Hasta luego!")
             break
         else:
-            print("⚠️ Opción no válida")
+            print("Opción no válida")
 
 if __name__ == "__main__":
     main()

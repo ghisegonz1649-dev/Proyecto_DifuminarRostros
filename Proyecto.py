@@ -55,9 +55,9 @@ try:
     face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
     if face_cascade.empty():
         raise Exception("No se pudo cargar el clasificador Haar Cascade")
-    print("✅ Detector de rostros cargado correctamente")
+    print("Detector de rostros cargado correctamente")
 except Exception as e:
-    print(f"❌ Error al cargar el detector: {e}")
+    print(f"Error al cargar el detector: {e}")
     exit(1)
 
 
@@ -141,7 +141,7 @@ def process_image(input_path, force_orientation=None):
   
     img = cv2.imread(input_path)
     if img is None:
-        print("❌ No se pudo leer la imagen")
+        print("No se pudo leer la imagen")
         return
     
     
@@ -156,7 +156,7 @@ def process_image(input_path, force_orientation=None):
     cv2.imwrite(output_path, processed_img)
     
    
-    print(f"\n✅ Imagen procesada guardada en: {output_path}")
+    print(f"\nImagen procesada guardada en: {output_path}")
     print(f"Tiempo de procesamiento: {time.time() - start_time:.2f} segundos")
     
 
@@ -188,10 +188,10 @@ def process_video(input_path, force_orientation=None):
   
     video_info = get_video_info(input_path)
     if not video_info:
-        print("❌ No se pudo leer el video")
+        print("No se pudo leer el video")
         return
     
-    print("\n📊 Información del video:")
+    print("\nInformación del video:")
     print(f"- Resolución: {video_info['width']}x{video_info['height']}")
     print(f"- FPS: {video_info['fps']:.2f}")
     print(f"- Duración: {video_info['duration']:.2f} segundos")
@@ -206,7 +206,7 @@ def process_video(input_path, force_orientation=None):
     cap = cv2.VideoCapture(input_path)
     ret, first_frame = cap.read()
     if not ret:
-        print("❌ No se pudo leer el primer frame del video")
+        print("No se pudo leer el primer frame del video")
         cap.release()
         return
     
@@ -217,7 +217,7 @@ def process_video(input_path, force_orientation=None):
   
     out = cv2.VideoWriter(output_path, fourcc, video_info['fps'], (out_width, out_height))
     if not out.isOpened():
-        print(f"❌ No se pudo crear el archivo de video: {output_path}")
+        print(f"No se pudo crear el archivo de video: {output_path}")
         cap.release()
         return
     
@@ -228,7 +228,7 @@ def process_video(input_path, force_orientation=None):
     frame_count = 1
     start_time = time.time()
     
-    print("\n⏳ Procesando video... (Presiona 'Q' para cancelar)")
+    print("\nProcesando video... (Presiona 'Q' para cancelar)")
     
     while True:
         ret, frame = cap.read()
@@ -255,14 +255,14 @@ def process_video(input_path, force_orientation=None):
     out.release()
     cv2.destroyAllWindows()
     
-    print(f"\n✅ Video procesado guardado en: {output_path}")
+    print(f"\nVideo procesado guardado en: {output_path}")
     print(f"Tiempo de procesamiento: {time.time() - start_time:.2f} segundos")
     print(f"Dimensiones del video: {out_width}x{out_height}")
 
 def process_webcam(force_orientation=None):
     cap = cv2.VideoCapture(0)
     if not cap.isOpened():
-        print("❌ No se pudo acceder a la cámara")
+        print("No se pudo acceder a la cámara")
         return
     
    
@@ -274,7 +274,7 @@ def process_webcam(force_orientation=None):
     width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
     height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
     
-    print("\n⏳ Midiendo FPS real... (espere 2 segundos)")
+    print("\nMidiendo FPS real... (espere 2 segundos)")
     start = time.time()
     frames = 0
     while time.time() - start < 2:
@@ -282,7 +282,7 @@ def process_webcam(force_orientation=None):
         if ret:
             frames += 1
     real_fps = max(5, frames / 2)  # Mínimo 5 FPS
-    print(f"✅ FPS real medido: {real_fps:.1f}")
+    print(f"FPS real medido: {real_fps:.1f}")
 
     
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
@@ -292,7 +292,7 @@ def process_webcam(force_orientation=None):
    
     ret, first_frame = cap.read()
     if not ret:
-        print("❌ No se pudo capturar frame de la cámara")
+        print("No se pudo capturar frame de la cámara")
         cap.release()
         return
     
@@ -302,14 +302,14 @@ def process_webcam(force_orientation=None):
 
     out = cv2.VideoWriter(output_path, fourcc, real_fps, (out_width, out_height))
     if not out.isOpened():
-        print(f"❌ No se pudo crear el archivo de video: {output_path}")
+        print(f"No se pudo crear el archivo de video: {output_path}")
         cap.release()
         return
     
 
     out.write(processed_frame)
     
-    print("\n🔴 Grabando... Presiona 'Q' para detener")
+    print("\nGrabando... Presiona 'Q' para detener")
     start_time = time.time()
     frame_count = 1
     
@@ -331,7 +331,7 @@ def process_webcam(force_orientation=None):
     cv2.destroyAllWindows()
     
     duration = time.time() - start_time
-    print(f"\n✅ Grabación guardada en: {output_path}")
+    print(f"\nGrabación guardada en: {output_path}")
     print(f"- Duración: {duration:.2f} segundos")
     print(f"- Frames capturados: {frame_count}")
     print(f"- Dimensiones: {out_width}x{out_height}")
@@ -339,7 +339,7 @@ def process_webcam(force_orientation=None):
 
 # ================= INTERFAZ DE USUARIO =================
 def get_orientation_preference():
-    print("\n🔄 Configuración de orientación:")
+    print("\nConfiguración de orientación:")
     print("1. Automática (detectar según el video/imagen)")
     print("2. Forzar horizontal")
     print("3. Forzar vertical")
@@ -352,16 +352,16 @@ def get_orientation_preference():
             return "horizontal"
         elif choice == "3":
             return "vertical"
-        print("❌ Opción no válida. Intente nuevamente.")
+        print("Opción no válida. Intente nuevamente.")
 
 def main():
     print("\n" + "="*60)
     print(" SISTEMA DE DETECCIÓN DE ROSTROS Y GUARDADO DE VIDEO/IMÁGENES ")
     print("="*60)
-    print(f"🔹 Rango de detección: {MIN_DETECTION_DISTANCE}-{MAX_DETECTION_DISTANCE} metros")
-    print(f"🔹 Intensidad de desenfoque: {BLUR_AGGRESSIVENESS} (más bajo = más fuerte)")
-    print(f"📂 Videos de salida: {os.path.abspath(OUTPUT_FOLDER)}")
-    print(f"🖼️ Imágenes de salida: {os.path.abspath(IMAGE_FOLDER)}")
+    print(f"Rango de detección: {MIN_DETECTION_DISTANCE}-{MAX_DETECTION_DISTANCE} metros")
+    print(f"Intensidad de desenfoque: {BLUR_AGGRESSIVENESS} (más bajo = más fuerte)")
+    print(f"Videos de salida: {os.path.abspath(OUTPUT_FOLDER)}")
+    print(f"Imágenes de salida: {os.path.abspath(IMAGE_FOLDER)}")
     
     while True:
         print("\nOpciones principales:")
@@ -373,9 +373,9 @@ def main():
         choice = input("Seleccione una opción (1-4): ").strip()
         
         if choice == "1":
-            video_path = input("📁 Ingrese la ruta del video: ").strip()
+            video_path = input("Ingrese la ruta del video: ").strip()
             if not os.path.exists(video_path):
-                print("❌ El archivo no existe")
+                print("El archivo no existe")
                 continue
                 
             orientation = get_orientation_preference()
@@ -386,20 +386,20 @@ def main():
             process_webcam(orientation)
             
         elif choice == "3":
-            img_path = input("🖼️ Ingrese la ruta de la imagen: ").strip()
+            img_path = input("Ingrese la ruta de la imagen: ").strip()
             if not os.path.exists(img_path):
-                print("❌ El archivo no existe")
+                print("El archivo no existe")
                 continue
                 
             orientation = get_orientation_preference()
             process_image(img_path, orientation)
             
         elif choice == "4":
-            print("👋 Saliendo del programa...")
+            print("Saliendo del programa...")
             break
             
         else:
-            print("❌ Opción no válida. Intente nuevamente.")
+            print("Opción no válida. Intente nuevamente.")
 
 if __name__ == "__main__":
     main()

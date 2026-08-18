@@ -36,7 +36,7 @@ def procesar_video(input_path, output_path=None, mostrar_preview=True):
         'tiempo_procesamiento': 0
     }
 
-    print("🔍 Procesando video... (Presione 'q' para detener)")
+    print("Procesando video... (Presione 'q' para detener)")
 
     start_time = time.time()
 
@@ -116,7 +116,7 @@ def desenfocar_rostros(img, faces):
 
 def mostrar_reporte_video(stats):
     print("\n" + "="*50)
-    print("📊 REPORTE FINAL - PROCESAMIENTO DE VIDEO")
+    print("REPORTE FINAL - PROCESAMIENTO DE VIDEO")
     print("="*50)
     
     porcentaje_deteccion = (stats['frames_con_rostros'] / stats['total_frames']) * 100
@@ -131,7 +131,7 @@ def mostrar_reporte_video(stats):
     print(f"• Tiempo total: {stats['tiempo_procesamiento']:.2f} segundos")
     print(f"• Velocidad: {stats['total_frames']/stats['tiempo_procesamiento']:.2f} FPS")
     print("="*50)
-    print(f"🌟 PORCENTAJE DE APRENDIZAJE: {aprendizaje:.2f}%")
+    print(f"PORCENTAJE DE APRENDIZAJE: {aprendizaje:.2f}%")
     print("="*50)
 
 def main():
@@ -148,13 +148,13 @@ def main():
             output_path = output_path if output_path else None
             procesar_video(input_path, output_path)
         elif opcion == "2":
-            print("🔴 Usando cámara web (Presione 'q' para detener)")
+            print("Usando cámara web (Presione 'q' para detener)")
             procesar_video('0', None)  # '0' para cámara web
         elif opcion == "3":
-            print("👋 ¡Hasta luego!")
+            print("¡Hasta luego!")
             break
         else:
-            print("⚠️ Opción no válida")
+            print("Opción no válida")
 
 if __name__ == "__main__":
     main()
